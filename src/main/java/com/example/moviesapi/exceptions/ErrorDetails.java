@@ -1,19 +1,19 @@
 package com.example.moviesapi.exceptions;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public class ErrorDetails {
+	private final LocalDateTime timeStamp;
     private String title;
-    private int status;
+    private final int status;
     private String detail;
-    private String path;
-    private Map<String, String> fieldErrors;
+    private final String path;
+    private Map<String,String> fieldErrors;
 
-
-    // Constructors
-    public ErrorDetails() {}
-
+    
     public ErrorDetails(String title, int status, String detail, String path, Map<String, String> fieldErrors) {
+    	this.timeStamp = LocalDateTime.now();
         this.title = title;
         this.status = status;
         this.detail = detail;
@@ -22,6 +22,11 @@ public class ErrorDetails {
     }
     
     // Getters and Setters
+    public LocalDateTime getTimeStamp() {
+	    return timeStamp;
+    }
+    
+    
     public String getTitle() {
         return title;
     }
@@ -34,10 +39,6 @@ public class ErrorDetails {
         return status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public String getDetail() {
         return detail;
     }
@@ -48,10 +49,6 @@ public class ErrorDetails {
 
     public String getPath() {
         return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public Map<String, String> getFieldErrors() {
