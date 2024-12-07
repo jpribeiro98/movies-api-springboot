@@ -59,35 +59,35 @@ Movie Resource Example (JSON):
 Here are the endpoints for interacting with the API, categorized by their functionality:
 
 ### 1. Get All Movies
-- **GET** /api/movies
+- **GET** `/api/movies`
 - Retrieves a list with all the movies in the database.
 
 Example:
-- **GET** ``http://localhost:8080/api/movies``
+- **GET** `http://localhost:8080/api/movies`
   
 
 ### 2. Get Movies by launch date
-- **GET** /api/movies/launchDate/{launchDate}
+- **GET** `/api/movies/launchDate/{launchDate}`
 - Retrieves a list of movies with the same launch date.
 
 Example:
-- **GET** ``http://localhost:8080/api/movies/launchDate/1994-10-14``
+- **GET** `http://localhost:8080/api/movies/launchDate/1994-10-14`
 
 
 ### 3. Get a Movie by id
-- **GET** /api/movies/{id}
+- **GET** `/api/movies/{id}`
 - Retrieves a specific movie identified by its unique ID.
 
 Example:
-- **GET** ``http://localhost:8080/api/movies/1``
+- **GET** `http://localhost:8080/api/movies/1`
  
 
 ### 4. Add a New Movie
-- **POST** /api/movies
+- **POST** `/api/movies`
 - Adds a new movie to the database and returns the created movie.
 
 Example:
-- **POST** ``http://localhost:8080/api/movies``
+- **POST** `http://localhost:8080/api/movies`
 - Content-Type: application/json
 - Body:  
 
@@ -102,11 +102,11 @@ Example:
           
           
 ### 5. Add all movies from a list
-- **POST** /api/movies/list
+- **POST** `/api/movies/list`
 - Adds a list of movies to the database and returns the list of created movies.
 
 Example:
-- **POST** ``http://localhost:8080/api/movies/list``
+- **POST** `http://localhost:8080/api/movies/list`
 - Content-Type: application/json
 - Body:
 
@@ -137,11 +137,11 @@ Example:
 ```
 
 ### 6. Update a movie by id
-- **PUT** /api/movies/{id}
+- **PUT** `/api/movies/{id}`
 - Updates the movie identified by its unique ID, using the details of the provided movie, and returns the updated movie.
 
 Example:
-- **PUT** ``http://localhost:8080/api/movies/1``
+- **PUT** `http://localhost:8080/api/movies/1`
 - Content-Type: application/json
 - Body:
 
@@ -155,19 +155,19 @@ Example:
 ```
 
 ### 7. Delete a Movie by id
-- **DELETE** /api/movies/{id}
+- **DELETE** `/api/movies/{id}`
 - Removes the movie identified by its unique ID from the database.
 
 Example:
-- **DELETE** ``http://localhost:8080/api/movies/2``
+- **DELETE** `http://localhost:8080/api/movies/2`
 
 
 ### 8. Delete all movies
-- **DELETE** /api/movies
+- **DELETE** `/api/movies`
 - Removes all the movies from the database.
 
 Example:
-- **DELETE** ``http://localhost:8080/api/movies``
+- **DELETE** `http://localhost:8080/api/movies`
 
 
 ## Error Handling
