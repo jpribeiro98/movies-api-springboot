@@ -46,10 +46,10 @@ Movie Resource Example (JSON):
 
 ```JSON 
 {
-  "title": "Inception",
-  "launchDate": "2010-07-16",
-  "rating": 8.8,
-  "revenue": 825786894
+    "title": "Inception",
+    "launchDate": "2010-07-16",
+    "rating": 8.8,
+    "revenue": 825786894
 }
 ```
 
@@ -67,7 +67,7 @@ Example:
   
 
 ### 2. Get Movies by launch date
-- **GET** /api/movies/launchDate/{date}
+- **GET** /api/movies/launchDate/{launchDate}
 - Retrieves a list of movies with the same launch date.
 
 Example:
@@ -84,7 +84,7 @@ Example:
 
 ### 4. Add a New Movie
 - **POST** /api/movies
-- Adds a new movie to the database.
+- Adds a new movie to the database and returns the created movie.
 
 Example:
 - **POST** ``http://localhost:8080/api/movies``
@@ -93,17 +93,17 @@ Example:
 
 ```JSON 
 {
-  "title": "Inception",
-  "launchDate": "2010-07-16",
-  "rating": 8.8,
-  "revenue": 825786894
+    "title": "Inception",
+    "launchDate": "2010-07-16",
+    "rating": 8.8,
+    "revenue": 825786894
 }
 ```
           
           
 ### 5. Add all movies from a list
 - **POST** /api/movies/list
-- Adds a list of movies to the database.
+- Adds a list of movies to the database and returns the list of created movies.
 
 Example:
 - **POST** ``http://localhost:8080/api/movies/list``
@@ -112,30 +112,33 @@ Example:
 
 ```JSON
 [
-  {
-    "title": "Pulp Fiction",
-    "launchDate": "1994-10-14",
-    "rating": 8.9,
-    "revenue": 212891598
-  },
-  {
-    "title": "The Shawshank Redemption",
-    "launchDate": "1994-09-23",
-    "rating": 9.3,
-    "revenue": 28713353
-  },
-  {
-    "title": "The Godfather",
-    "launchDate": "1972-03-24",
-    "rating": 9.2,
-    "revenue": 270007394
-  }
+    {
+        "id": 1,
+        "title": "Pulp Fiction",
+        "launchDate": "1994-10-14",
+        "rating": 8.9,
+        "revenue": 212891598
+    },
+    {
+        "id": 2,
+        "title": "The Shawshank Redemption",
+        "launchDate": "1994-09-23",
+        "rating": 9.3,
+        "revenue": 28713353
+    },
+    {
+        "id": 3,
+        "title": "The Godfather",
+        "launchDate": "1972-03-24",
+        "rating": 9.2,
+        "revenue": 270007394
+    }
 ]
 ```
 
 ### 6. Update a movie by id
 - **PUT** /api/movies/{id}
-- Updates the movie identified by its unique ID using the details of the provided movie.
+- Updates the movie identified by its unique ID, using the details of the provided movie, and returns the updated movie.
 
 Example:
 - **PUT** ``http://localhost:8080/api/movies/1``
@@ -144,10 +147,10 @@ Example:
 
 ```JSON
 {
-  "title": "Inception updated",
-  "launchDate": "2010-07-16",
-  "rating": 9.0,
-  "revenue": 825786894
+    "title": "Inception updated",
+    "launchDate": "2010-07-16",
+    "rating": 9.0,
+    "revenue": 825786894
 }
 ```
 
@@ -188,23 +191,35 @@ Occurs when input data for a movie or a list of movies is invalid.
 
 ```JSON
 {
-  "timestamp": "2024-12-05T15:45:30.462511",
-  "title": "Validation Errors",
-  "status": 400,
-  "detail": "Invalid fields in the provided movie",
-  "path": "/api/movies",
-  "fieldErrors": {
-      "launchDate": "Launch date must be in the format yyyy-MM-dd"
-      "rating": "Rating must be between 0.0 and 10.0"
-  }
+    "timestamp": "2024-12-05T15:45:30.2247419",
+    "title": "Validation Errors",
+    "status": 400,
+    "detail": "Invalid fields in the provided movie",
+    "path": "/api/movies",
+    "fieldErrors": {
+        "rating": "Rating must be between 0.0 and 10.0",
+        "launchDate": "Launch date must be in the past or present"
+    }
 }
 ```
 
 ### 2. Validation Error in the Path Variable
+Occurs when a path variable in the request contains invalid data.
 
+**Example Scenario:** The client sends a GET request to `/api/movies/launchDate/2030-05-01`. Since the launch date is invalid because it's supposed to represent a date in the past or present, the API identifies this validation error and returns the following error response:
 
-
-
+```JSON
+{
+    "timeStamp": "2024-12-05T15:47:12.1367688",
+    "title": "Validation Error",
+    "status": 400,
+    "detail": "Invalid launch date path variable",
+    "path": "/api/movies/launchDate/2030-05-01",
+    "fieldErrors": {
+        "launchDate": "Launch date must be in the past or present"
+    }
+}
+```
 
 ### 3. Incorrect Request Format
 Occurs when the request data does not match the required structure or contains fields with invalid types or formats.
@@ -213,14 +228,14 @@ Occurs when the request data does not match the required structure or contains f
 
 ```JSON
 {
-  "timestamp": "2024-12-05T15:50:30.122411",
-  "title": "Request Format Errors",
-  "status": 400,
-  "detail": "The provided movie has fields with incorrect formats",
-  "path": "/api/movies",
-  "fieldErrors": {
-      "launchDate": "Launch date must be in the format yyyy-MM-dd"
-  }
+    "timestamp": "2024-12-05T15:50:26.8687696",
+    "title": "Request Format Errors",
+    "status": 400,
+    "detail": "The request contains movie fields with incorrect formats",
+    "path": "/api/movies",
+    "fieldErrors": {
+        "launchDate": "Launch date must be in the format yyyy-MM-dd"
+    }
 }
 ```
 
@@ -231,35 +246,46 @@ Occurs when a path variable provided in the request does not match the expected 
 
 ```JSON
 {
-  "timeStamp": "2024-12-05T15:55:30.422411",
-  "title": "ID path variable is in the wrong format",
-  "status": 400,
-  "detail": "ID must be a numeric value between -9223372036854775808 and 9223372036854775807",
-  "path": "/api/movies/abc",
-  "fieldErrors": null
+    "timeStamp": "2024-12-05T15:55:13.5980472",
+    "title": "ID path variable is in the wrong format",
+    "status": 400,
+    "detail": "ID must be a numeric value between -9223372036854775808 and 9223372036854775807",
+    "path": "/api/movies/abc",
+    "fieldErrors": null
 }
 ```
 
 ### 5. Movie Not Found
 Occurs when the requested movie cannot be found in the database.
 
-**Example Scenario:** The client sends a GET request to `/api/movies/99` to retrieve details for a movie with ID 99. Since no movie with this ID exists in the database, the API returns the following error message:
+**Example Scenario:** The client sends a GET request to `/api/movies/99` to retrieve details for a movie with ID 99. Since no movie with this ID exists in the database, the API returns the following error response:
 
 ```JSON
 {
-  "timestamp": "2024-12-05T15:56:30.232211",
-  "title": "Movie Not Found",
-  "status": 404,
-  "detail": "Movie with ID 99 was not found in the database",
-  "path": "/api/movies/99",
-  "fieldErrors": null
+    "timestamp": "2024-12-05T15:56:38.1312519",
+    "title": "Movie Not Found",
+    "status": 404,
+    "detail": "Movie with ID 99 was not found in the database",
+    "path": "/api/movies/99",
+    "fieldErrors": null
 }
 ```
 
 ### 6. Invalid URI
+Occurs when the client sends a request to a URI that does not exist on the server or is incorrectly formatted.
 
+**Example Scenario:** The client sends a GET request to `/wrongEndpoint`. Since this URI does not match any of the API's defined endpoints, the API identifies this issue and responds with the following error response:
 
-
+```JSON
+{
+    "timeStamp": "2024-12-05T15:57:13.3520531",
+    "title": "Invalid URI",
+    "status": 404,
+    "detail": "The requested URI is invalid. Ensure it is correctly formatted and points to an existing API endpoint",
+    "path": "/wrongEndpoint",
+    "fieldErrors": null
+}
+```
 
 ### 7. Method Not Allowed
 Occurs when using an unsupported HTTP method for a specific endpoint.
@@ -268,20 +294,30 @@ Occurs when using an unsupported HTTP method for a specific endpoint.
 
 ```JSON
 {
-  "timestamp": "2024-12-05T15:58:30.323411",
-  "title": "Method Not Allowed",
-  "status": 405,
-  "detail": "The request method PUT is not allowed for this endpoint. Allowed methods for this endpoint: POST, GET, DELETE",
-  "path": "/api/movies",
-  "fieldErrors": null
+    "timestamp": "2024-12-05T15:58:32.7701001",
+    "title": "Method Not Allowed",
+    "status": 405,
+    "detail": "The request method PUT is not allowed for the specified URI. Allowed methods for this URI: GET, POST, DELETE",
+    "path": "/api/movies",
+    "fieldErrors": null
 }
 ```
 
 ### 8. Internal Server Error
+Occurs when the server encounters an unexpected error that prevents it from fulfilling the request.
 
+**Error Response:** 
 
-
-
+```JSON
+{
+    "timeStamp": "2024-12-05T16:02:11.4325466",
+    "title": "Internal Server Error",
+    "status": 500,
+    "detail": "An unexpected error occurred on the server. Please try again later",
+    "path": "/api/movies",
+    "fieldErrors": null
+}
+```
 
 ## Running the JUnit Tests
 

@@ -3,18 +3,18 @@ POST http://localhost:8080/api/movies/all
 Content-Type: application/json
 
 [
-    {
-        "title": "Gladiator",
-        "launchDate": "2000-01-05",
-        "rating": 8.5,
-        "revenue": 451683599
-    },
-    {
-        "title": "Inception",
-        "launchDate": "2010-07-16",
-        "rating": 8.8,
-        "revenue": 825786894
-    }
+  {
+    "title": "Gladiator",
+    "launchDate": "2000-01-05",
+    "rating": 8.5,
+    "revenue": 451683599
+  },
+  {
+    "title": "Inception",
+    "launchDate": "2010-07-16",
+    "rating": 8.8,
+    "revenue": 825786894
+  }
 ]
 
 
@@ -24,10 +24,10 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title" : "Forrest Gump",
-  "launchDate" : "1994-10-28",
-  "rating" : 8.0,
-  "revenue": 679835137
+    "title" : "Forrest Gump",
+    "launchDate" : "1994-10-28",
+    "rating" : 8.0,
+    "revenue": 679835137
 }
 
 
@@ -52,11 +52,11 @@ PUT http://localhost:8080/api/movies/1
 Content-Type: application/json
 
 {
-        "title": "Fight Club",
-        "launchDate": "1999-11-12",
-        "rating": 8.8,
-        "revenue": 100900000
-    }
+    "title": "Fight Club",
+    "launchDate": "1999-11-12",
+    "rating": 8.8,
+    "revenue": 100900000
+}
 
 
 ###Returns the movie with id = 1
@@ -81,10 +81,10 @@ PUT http://localhost:8080/api/movies/1
 Content-Type: application/json
 
 {
-  "title": "Fight Club",
-  "launchDate": "1999-11-12",
-  "rating": 8.8,
-  "revenue": 100900000
+    "title": "Fight Club",
+    "launchDate": "1999-11-12",
+    "rating": 8.8,
+    "revenue": 100900000
 }
 
 
@@ -94,10 +94,10 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title": "Fight Club",
-  "launchDate": "1999-11-12",
-  "rating": -5.2,
-  "revenue": 100900000
+    "title": "Fight Club",
+    "launchDate": "1999-11-12",
+    "rating": -5.2,
+    "revenue": 100900000
 }
 
 
@@ -106,10 +106,10 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title": "Fight Club",
-  "launchDate": "1999-11-12",
-  "rating": 15.0,
-  "revenue": 100900000
+    "title": "Fight Club",
+    "launchDate": "1999-11-12",
+    "rating": 15.0,
+    "revenue": 100900000
 }
 
 
@@ -118,10 +118,10 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title": "",
-  "launchDate": "1999-11-12",
-  "rating": 8.8,
-  "revenue": 100900000
+    "title": "",
+    "launchDate": "1999-11-12",
+    "rating": 8.8,
+    "revenue": 100900000
 }
 
 
@@ -131,10 +131,10 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title": null,
-  "launchDate": "1999-11-12",
-  "rating": 8.8,
-  "revenue": 100900000
+    "title": null,
+    "launchDate": "1999-11-12",
+    "rating": 8.8,
+    "revenue": 100900000
 }
 
 
@@ -144,10 +144,10 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title": "Fight Club",
-  "launchDate": "",
-  "rating": 8.8,
-  "revenue": 100900000
+    "title": "Fight Club",
+    "launchDate": "",
+    "rating": 8.8,
+    "revenue": 100900000
 }
 
 ###Tries to create a movie with invalid launchDate
@@ -155,10 +155,10 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-   "title": "Fight Club",
-   "launchDate": "1999-12-1919191",
-   "rating": 8.8,
-   "revenue": 100900000
+    "title": "Fight Club",
+    "launchDate": "1999-12-1919191",
+    "rating": 8.8,
+    "revenue": 100900000
 }
 
 
@@ -168,22 +168,10 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title": "Fight Club",
-  "launchDate": "1999-12",
-  "rating": 8.8,
-  "revenue": 100900000
-}
-
-
-###Tries to create a movie with invalid launchDate
-POST http://localhost:8080/api/movies
-Content-Type: application/json
-
-{
-  "title": "Fight Club",
-  "launchDate": "12-1919191",
-  "rating": 8.8,
-  "revenue": 100900000
+    "title": "Fight Club",
+    "launchDate": "1999-12",
+    "rating": 8.8,
+    "revenue": 100900000
 }
 
 
@@ -192,10 +180,22 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title": "Fight Club",
-  "launchDate": "1999919191",
-  "rating": 8.8,
-  "revenue": 100900000
+    "title": "Fight Club",
+    "launchDate": "12-1919191",
+    "rating": 8.8,
+    "revenue": 100900000
+}
+
+
+###Tries to create a movie with invalid launchDate
+POST http://localhost:8080/api/movies
+Content-Type: application/json
+
+{
+    "title": "Fight Club",
+    "launchDate": "1999919191",
+    "rating": 8.8,
+    "revenue": 100900000
 }
 
 
@@ -205,10 +205,10 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title": "Fight Club",
-  "launchDate": "2030-11-10",
-  "rating": 8.8,
-  "revenue": 100900000
+    "title": "Fight Club",
+    "launchDate": "2030-11-10",
+    "rating": 8.8,
+    "revenue": 100900000
 }
 
 
@@ -230,8 +230,8 @@ POST http://localhost:8080/api/movies
 Content-Type: application/json
 
 {
-  "title": "Fight Club",
-  "launchDate": "1999-11-12",
-  "rating": 8.8,
-  "revenue": null
+    "title": "Fight Club",
+    "launchDate": "1999-11-12",
+    "rating": 8.8,
+    "revenue": null
 }

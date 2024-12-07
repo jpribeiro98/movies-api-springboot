@@ -27,15 +27,22 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorDetails> handleValidationException(MethodArgumentNotValidException ex, WebRequest request) {
         Map<String,String> fieldErrors = new HashMap<>();
+        String errorTitle = "Validation Error";
+        String errorDetail = "Invalid field in the provided movie";
         
         ex.getBindingResult().getFieldErrors().forEach(error -> 
             fieldErrors.put(error.getField(), error.getDefaultMessage())
         );
+        
+        if(fieldErrors.size() > 1) {
+        	errorTitle = "Validation Errors";
+			errorDetail = "Invalid fields in the provided movie";
+        }
 
         ErrorDetails errorDetails = new ErrorDetails(
-                "Validation Errors", // Title of the error
+                errorTitle, // Title of the error
                 HttpStatus.BAD_REQUEST.value(), // Status code (400)
-                "Invalid fields in the provided movie", // Detail message  
+				errorDetail, // Detail message  
                 request.getDescription(false).replace("uri=", ""), // URI of the request
                 fieldErrors // Map of field-specific errors
         );
@@ -48,23 +55,28 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HandlerMethodValidationException.class)
     public ResponseEntity<ErrorDetails> handleListValidationException(HandlerMethodValidationException ex, WebRequest request) {
     	Map<String,String> fieldErrors = new HashMap<>();
-    	String errorDetail = "Invalid movie fields in the request";
+    	String errorTitle = "Validation Error";
+    	String errorDetail = "Invalid field in the provided movie list";
     	
     	if(ex.getMethod().getName().equals("findByLaunchDate")) {
     		errorDetail = "Invalid launch date path variable";
     		fieldErrors.put("launchDate", "Launch date must be in the past or present");
     		
     	} else if(ex.getMethod().getName().equals("createAll")) {
-    		errorDetail = "Invalid fields in the provided movie list";
     		
     		for(MessageSourceResolvable error: ex.getAllErrors()) {
             	FieldError fieldError = (FieldError) error;
     			fieldErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
     		}
+    		
+    		if(fieldErrors.size() > 1) {
+				errorTitle = "Validation Errors";
+				errorDetail = "Invalid fields in the provided movie list";
+			}
     	}
     	
     	ErrorDetails errorDetails = new ErrorDetails(
-                "Validation Errors", // Title of the error
+                errorTitle, // Title of the error
                 HttpStatus.BAD_REQUEST.value(), // Status code (400)
                 errorDetail, // Detail message  
                 request.getDescription(false).replace("uri=", ""), // URI of the request
@@ -78,7 +90,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorDetails> handleMessageNotReadableException(HttpMessageNotReadableException ex, WebRequest request) {
         Map<String,String> fieldErrors = new HashMap<>();
-        String title = "Request Format Errors";
+        String errorTitle = "Request Format Errors";
         ErrorDetails errorDetails = null;
         
         if(!ex.getMessage().contains("LocalDate") && !ex.getMessage().contains("BigDecimal")
@@ -86,13 +98,14 @@ public class GlobalExceptionHandler {
         	
         	// Prepare the error details
             errorDetails = new ErrorDetails(
-            		title, // Title of the error
+					errorTitle, // Title of the error
                     HttpStatus.BAD_REQUEST.value(), // Status code (400)
                     ex.getMessage(), // Detail message
                     request.getDescription(false).replace("uri=", ""), // URI of the request
                     fieldErrors // Map of field-specific errors
                     );
         } else {
+        	
         	if(ex.getMessage().contains("LocalDate")) {
         		fieldErrors.put("launchDate", "Launch date must be in the format yyyy-MM-dd");
         	}
@@ -104,11 +117,15 @@ public class GlobalExceptionHandler {
 			if(ex.getMessage().contains("Long")) {
 				fieldErrors.put("revenue", "Revenue must be a number");
 			}
+			
+			if(fieldErrors.size() > 1) {
+				errorTitle = "Request Format Errors";				
+			}
 		
 	        errorDetails = new ErrorDetails(
-	        		title, // Title of the error
+	                errorTitle, // Title of the error
 	                HttpStatus.BAD_REQUEST.value(), // Status code (400)
-	                "The provided movie has fields with incorrect formats", // Detail message
+	                "The request contains movie fields with incorrect formats", // Detail message
 	                request.getDescription(false).replace("uri=", ""), // URI of the request
 	                fieldErrors // Map of field-specific errors
 	                );
@@ -164,12 +181,12 @@ public class GlobalExceptionHandler {
     	ErrorDetails errorDetails = new ErrorDetails(
                 "Invalid URI", // Title of the error
                 HttpStatus.NOT_FOUND.value(), // Status code (404)
-                "The requested URI is invalid. Please ensure the URI is properly formed and points to a valid endpoint", // Detail message
+                "The requested URI is invalid. Ensure it is correctly formatted and points to an existing API endpoint", // Detail message
                 request.getDescription(false).replace("uri=", ""), // URI of the request
                 null // Map of field-specific errors
         );
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
 	// Handles a method not supported exception (405 METHOD_NOT_ALLOWED)
@@ -202,7 +219,7 @@ public class GlobalExceptionHandler {
     	ErrorDetails errorDetails = new ErrorDetails(
                 "Internal Server Error", // Title of the error
                 HttpStatus.INTERNAL_SERVER_ERROR.value(), // Status code (404)
-                ex.getMessage(), // Detail message
+                "An unexpected error occurred on the server. Please try again later.", // Detail message
                 request.getDescription(false).replace("uri=", ""), // URI of the request
                 null // Map of field-specific errors
         );
