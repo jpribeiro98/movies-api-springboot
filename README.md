@@ -17,19 +17,23 @@ This is a small RESTful API for managing a collection of movies, providing basic
 
 I have already built the JAR file so to run the application just follow these simple steps:
 
-**1. Navigate to the target directory**. Open your command prompt, and navigate to the target directory where the JAR file is located.
-
-```bash 
-cd path\to\your\project\target
-```
+**1. Navigate to the target directory:**
+ - Open your command prompt, and navigate to the target directory where the JAR file is located.
+ 
+  ```bash 
+ cd path\to\your\project\target
+ ```
    
-**2. Run the JAR file**. Use the following command to start the application:
-
-```bash
-java -jar moviesapi-0.0.1-SNAPSHOT.jar
-````
+**2. Run the JAR file:**
+ - Use the following command to start the application:
+ 
+ ```bash
+ java -jar moviesapi-0.0.1-SNAPSHOT.jar
+ ````
    
-**3. Access the application**. The server should now be running on: ``http://localhost:8080``
+**3. Access the application:** 
+ - The server should now be running on `http://localhost:8080`
+ - Open this URL in your browser or use a tool like Postman to test the API.
 
 
 ## Movie Resource
@@ -44,7 +48,7 @@ Each movie in the application has the following attributes:
 
 Movie Resource Example (JSON):
 
-```JSON 
+```json 
 {
     "title": "Inception",
     "launchDate": "2010-07-16",
@@ -91,7 +95,7 @@ Example:
 - Content-Type: application/json
 - Body:  
 
-```JSON 
+```json 
 {
     "title": "Inception",
     "launchDate": "2010-07-16",
@@ -110,7 +114,7 @@ Example:
 - Content-Type: application/json
 - Body:
 
-```JSON
+```json
 [
     {
         "id": 1,
@@ -145,7 +149,7 @@ Example:
 - Content-Type: application/json
 - Body:
 
-```JSON
+```json
 {
     "title": "Inception updated",
     "launchDate": "2010-07-16",
@@ -189,7 +193,7 @@ Occurs when input data for a movie or a list of movies is invalid.
 
 **Example Scenario:** The client sends a POST request to `/api/movies` with a request body containing a movie where the launchDate  is set to a future date (e.g., "launchDate": "2025-10-12") and the rating is a negative number (e.g., "rating": -0.1). Since launch dates in the future and negative ratings are invalid, the API identifies these errors and returns the following error response:
 
-```JSON
+```json
 {
     "timestamp": "2024-12-05T15:45:30.2247419",
     "title": "Validation Errors",
@@ -208,7 +212,7 @@ Occurs when a path variable in the request contains invalid data.
 
 **Example Scenario:** The client sends a GET request to `/api/movies/launchDate/2030-05-01`. Since the launch date is invalid because it's supposed to represent a date in the past or present, the API identifies this validation error and returns the following error response:
 
-```JSON
+```json
 {
     "timeStamp": "2024-12-05T15:47:12.1367688",
     "title": "Validation Error",
@@ -226,7 +230,7 @@ Occurs when the request data does not match the required structure or contains f
 
 **Example Scenario:** The client sends a POST request to `/api/movies` with a request body containing a movie where the launchDate has an invalid format (e.g., "launchDate": "1994-28"). The API detects the incorrect format and returns the following error response:
 
-```JSON
+```json
 {
     "timestamp": "2024-12-05T15:50:26.8687696",
     "title": "Request Format Errors",
@@ -244,7 +248,7 @@ Occurs when a path variable provided in the request does not match the expected 
 
 **Example Scenario:** The client sends a GET request to `/api/movies/abc`, but the id path variable is expected to be a numeric value. Since "abc" is not a valid number, the API detects the type mismatch and returns the following error response:
 
-```JSON
+```json
 {
     "timeStamp": "2024-12-05T15:55:13.5980472",
     "title": "ID path variable is in the wrong format",
@@ -260,7 +264,7 @@ Occurs when the requested movie cannot be found in the database.
 
 **Example Scenario:** The client sends a GET request to `/api/movies/99` to retrieve details for a movie with ID 99. Since no movie with this ID exists in the database, the API returns the following error response:
 
-```JSON
+```json
 {
     "timestamp": "2024-12-05T15:56:38.1312519",
     "title": "Movie Not Found",
@@ -276,7 +280,7 @@ Occurs when the client sends a request to a URI that does not exist on the serve
 
 **Example Scenario:** The client sends a GET request to `/wrongEndpoint`. Since this URI does not match any of the API's defined endpoints, the API identifies this issue and responds with the following error response:
 
-```JSON
+```json
 {
     "timeStamp": "2024-12-05T15:57:13.3520531",
     "title": "Invalid URI",
@@ -292,7 +296,7 @@ Occurs when using an unsupported HTTP method for a specific endpoint.
 
 **Example Scenario:** The client sends a PUT request to `/api/movies` with a movie in the request body. However this endpoint only supports POST, GET and DELETE methods. The API detects the invalid method and returns the following error response:
 
-```JSON
+```json
 {
     "timestamp": "2024-12-05T15:58:32.7701001",
     "title": "Method Not Allowed",
@@ -308,7 +312,7 @@ Occurs when the server encounters an unexpected error that prevents it from fulf
 
 **Error Response:** 
 
-```JSON
+```json
 {
     "timeStamp": "2024-12-05T16:02:11.4325466",
     "title": "Internal Server Error",
