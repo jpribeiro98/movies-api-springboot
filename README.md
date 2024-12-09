@@ -7,10 +7,10 @@ This is a small RESTful API for managing a collection of movies, providing basic
 
 - **Java Version**: 17 or higher
 - **Build Tool**: Maven 3.6.3 or higher. You can check your installed Maven version by running the following command:
- 
-	```bash
-	mvn --version
-     ```
+
+    ```bash
+    mvn --version
+    ```
 
 
 ## How to Run the Application
@@ -18,7 +18,7 @@ This is a small RESTful API for managing a collection of movies, providing basic
 I have already built the JAR file so to run the application just follow these simple steps:
 
 **1. Navigate to the target directory:**
-- Open your command prompt, and navigate to the target directory where the JAR file is located.
+- Open your command prompt, and navigate to the target directory where the JAR file is located.   
   	     
    ```bash 
    cd path\to\your\project\target
@@ -27,7 +27,7 @@ I have already built the JAR file so to run the application just follow these si
 **2. Run the JAR file:**
 - Use the following command to start the application:
    
-   ```bash
+   ```java
    java -jar moviesapi-0.0.1-SNAPSHOT.jar
    ```
    
