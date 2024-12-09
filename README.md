@@ -7,10 +7,10 @@ This is a small RESTful API for managing a collection of movies, providing basic
 
 - **Java Version**: 17 or higher
 - **Build Tool**: Maven 3.6.3 or higher. You can check your installed Maven version by running the following command:
-  
-   ```bash
-   mvn --version
-   ```
+ 
+	```bash
+	mvn --version
+     ```
 
 
 ## How to Run the Application
