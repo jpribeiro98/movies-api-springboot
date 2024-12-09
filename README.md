@@ -27,7 +27,7 @@ I have already built the JAR file so to run the application just follow these si
 **2. Run the JAR file:**
 - Use the following command to start the application:
    
-   ```java
+   ```bash
    java -jar moviesapi-0.0.1-SNAPSHOT.jar
    ```
    
