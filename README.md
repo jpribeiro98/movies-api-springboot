@@ -7,7 +7,7 @@ This is a small RESTful API for managing a collection of movies, providing basic
 
 - **Java Version**: 17 or higher
 - **Build Tool**: Maven 3.6.3 or higher. You can check your installed Maven version by running the following command:
-
+  
    ```bash
    mvn --version
    ```
@@ -19,7 +19,7 @@ I have already built the JAR file so to run the application just follow these si
 
 **1. Navigate to the target directory:**
 - Open your command prompt, and navigate to the target directory where the JAR file is located.
-    
+  	     
    ```bash 
    cd path\to\your\project\target
    ```
@@ -29,7 +29,7 @@ I have already built the JAR file so to run the application just follow these si
    
    ```bash
    java -jar moviesapi-0.0.1-SNAPSHOT.jar
-   ````
+   ```
    
 **3. Access the application:** 
  - The server should now be running on `http://localhost:8080`
@@ -95,14 +95,14 @@ Example:
 - Content-Type: application/json
 - Body:  
 
-```json 
-{
-    "title": "Inception",
-    "launchDate": "2010-07-16",
-    "rating": 8.8,
-    "revenue": 825786894
-}
-```
+   ```json 
+   {
+       "title": "Inception",
+       "launchDate": "2010-07-16",
+       "rating": 8.8,
+       "revenue": 825786894
+   }
+   ```
           
           
 ### 5. Add all movies from a list
@@ -114,31 +114,31 @@ Example:
 - Content-Type: application/json
 - Body:
 
-```json
-[
-    {
-        "id": 1,
-        "title": "Pulp Fiction",
-        "launchDate": "1994-10-14",
-        "rating": 8.9,
-        "revenue": 212891598
-    },
-    {
-        "id": 2,
-        "title": "The Shawshank Redemption",
-        "launchDate": "1994-09-23",
-        "rating": 9.3,
-        "revenue": 28713353
-    },
-    {
-        "id": 3,
-        "title": "The Godfather",
-        "launchDate": "1972-03-24",
-        "rating": 9.2,
-        "revenue": 270007394
-    }
-]
-```
+   ```json
+   [
+       {
+           "id": 1,
+           "title": "Pulp Fiction",
+           "launchDate": "1994-10-14",
+           "rating": 8.9,
+           "revenue": 212891598
+       },
+       {
+           "id": 2,
+           "title": "The Shawshank Redemption",
+           "launchDate": "1994-09-23",
+           "rating": 9.3,
+           "revenue": 28713353
+       },
+       {
+           "id": 3,
+           "title": "The Godfather",
+           "launchDate": "1972-03-24",
+           "rating": 9.2,
+           "revenue": 270007394
+       }
+   ]
+   ```
 
 ### 6. Update a movie by id
 - **PUT** `/api/movies/{id}`
@@ -149,14 +149,14 @@ Example:
 - Content-Type: application/json
 - Body:
 
-```json
-{
-    "title": "Inception updated",
-    "launchDate": "2010-07-16",
-    "rating": 9.0,
-    "revenue": 825786894
-}
-```
+   ```json
+   {
+       "title": "Inception updated",
+       "launchDate": "2010-07-16",
+       "rating": 9.0,
+       "revenue": 825786894
+   }
+   ```
 
 ### 7. Delete a Movie by id
 - **DELETE** `/api/movies/{id}`
