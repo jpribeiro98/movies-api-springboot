@@ -166,9 +166,15 @@ class MovieRepositoryTest {
 	}
 	
 	@Test
-	void shouldDeleteMovie() {
+	void shouldDeleteMovieWithValidId() {
 		movieRepository.delete(1L);
 		assertEquals(2, movieRepository.findAll().size());
+	}
+	
+	@Test
+	void shouldNotDeleteMovieWithInvalidId() {
+		movieRepository.delete(10L);
+		assertEquals(3, movieRepository.findAll().size());
 	}
 	
 	@Test

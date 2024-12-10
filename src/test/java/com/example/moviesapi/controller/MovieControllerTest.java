@@ -214,11 +214,7 @@ class MovieControllerTest {
 
     @Test
     void shouldNotFindMovie_withInvalidId() throws Exception {
-    	List<Long> validIds = movies.stream()
-    			                    .map(m -> m.getId())
-    			                    .toList();
-    	
-    	Long invalidId = getRandomIdThatDoesNotExistInList(validIds);
+    	Long invalidId = getRandomIdThatDoesNotExistInListOfMovies();
     	
         when(mockMovieService.findById(invalidId)).thenThrow(new MovieNotFoundException(invalidId));
         
@@ -229,7 +225,11 @@ class MovieControllerTest {
     }
 
     
-    private Long getRandomIdThatDoesNotExistInList(List<Long> validIds) {
+    private Long getRandomIdThatDoesNotExistInListOfMovies() {
+    	List<Long> validIds = movies.stream()
+                                    .map(m -> m.getId())
+                                    .toList();
+    	
 		Random r = new Random();
 		Long newId;
 		
@@ -294,11 +294,7 @@ class MovieControllerTest {
     
     @Test
     void shouldNotUpdateMovie_WithInvalidId() throws Exception {
-    	List<Long> validIds = movies.stream()
-                                    .map(m -> m.getId())
-                                    .toList();
-    	
-		Long invalidId = getRandomIdThatDoesNotExistInList(validIds);
+		Long invalidId = getRandomIdThatDoesNotExistInListOfMovies();
 		
 		Movie newMovie = new Movie("Forrest Gump", LocalDate.of(1994, 10, 28), new BigDecimal(8.0), Long.valueOf(678200000));
 		when(mockMovieService.update(any(Movie.class), eq(invalidId))).thenThrow(new MovieNotFoundException(invalidId));						
@@ -374,9 +370,19 @@ class MovieControllerTest {
     }
     
     @Test
-    void shouldDeleteMovie() throws Exception {
+    void shouldDeleteMovie_withValidId() throws Exception {
         mvc.perform(delete("/api/movies/{id}", movies.get(0).getId()))
                 .andExpect(status().isNoContent());
+    }
+    
+    @Test
+    void shouldNotDeleteMovie_withInvalidId() throws Exception {
+    	Long invalidId = getRandomIdThatDoesNotExistInListOfMovies();
+    	
+    	doThrow(new MovieNotFoundException(invalidId)).when(mockMovieService).delete(invalidId);
+    			
+        mvc.perform(delete("/api/movies/{id}", invalidId))
+                .andExpect(status().isNotFound());
     }
 
     @Test

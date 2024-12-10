@@ -51,7 +51,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public void delete(Long id) {
-        movieRepository.delete(id);
+    	if(movieRepository.findById(id).isEmpty()) {
+    		throw new MovieNotFoundException(id);
+    	} 
+    	
+    	movieRepository.delete(id);  	
     }
 
     @Override

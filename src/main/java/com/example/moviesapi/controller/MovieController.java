@@ -44,7 +44,7 @@ public class MovieController {
     }
 
     @GetMapping(value = "/launchDate/{launchDate}")
-    public List<Movie> findByLaunchDate(@Valid @PastOrPresent @PathVariable LocalDate launchDate) {
+    public List<Movie> findByLaunchDate(@PastOrPresent @PathVariable LocalDate launchDate) {
         return movieService.findByLaunchDate(launchDate);
     }
 
