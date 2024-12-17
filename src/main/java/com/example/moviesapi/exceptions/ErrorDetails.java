@@ -11,7 +11,6 @@ public class ErrorDetails {
     private final String path;
     private Map<String,String> fieldErrors;
 
-    
     public ErrorDetails(String title, int status, String detail, String path, Map<String, String> fieldErrors) {
     	this.timeStamp = LocalDateTime.now();
         this.title = title;

@@ -23,13 +23,11 @@ public class MovieRepository {
     private final JdbcClient jdbcClient;
     private final JdbcTemplate jdbcTemplate;
     
-
     public MovieRepository(JdbcClient jdbcClient, JdbcTemplate jdbcTemplate) {
         this.jdbcClient = jdbcClient;
         this.jdbcTemplate = jdbcTemplate;
     }
     
-
     public Movie create(Movie movie) throws IllegalStateException {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         String sql = "INSERT INTO Movie (title, launchDate, rating, revenue) VALUES (?,?,?,?)";
@@ -72,22 +70,22 @@ public class MovieRepository {
 
     public Optional<Movie> findById(Long id) {
         return jdbcClient.sql("SELECT * FROM Movie WHERE id = ?")
-                .param(id)
-                .query(Movie.class)
-                .optional();
+                         .param(id)
+                         .query(Movie.class)
+                         .optional();
     }
 
     public List<Movie> findAll() {
         return jdbcClient.sql("SELECT * FROM Movie")
-                .query(Movie.class)
-                .list();
+                         .query(Movie.class)
+                         .list();
     }
 
     public List<Movie> findByLaunchDate(LocalDate launchDate) {
         return jdbcClient.sql("SELECT * FROM Movie WHERE launchDate = ?")
-                .param(launchDate)
-                .query(Movie.class)
-                .list();
+                         .param(launchDate)
+                         .query(Movie.class)
+                         .list();
     }
 
     public Optional<Movie> update(Movie movie, Long id) {
